@@ -1,7 +1,16 @@
 {{define "title"}}Upload{{end}}
 
 {{define "content"}}
-<form action="{{.}}" method="POST" enctype="multipart/form-data">
-Upload File: <input type="file" name="file"><br>
-<input type="submit" name="submit" value="Submit">
+    <form action="{{.}}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="kitten_name">Kitten Name</label>
+            <input id="kitten_name" type="text" class="form-control" name="name" accept="image/*">
+        </div>
+        <div class="form-group">
+            <label for="file" id="file_upload"></label>
+            <input id="file_upload" type="file" name="file">
+            <p class="help-block">Upload an image of your favorite kitten!</p>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Kitten</button>
+    </form>
 {{end}}
