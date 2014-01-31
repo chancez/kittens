@@ -1,0 +1,21 @@
+{{define "title"}}Gallery{{end}}
+
+{{define "content"}}
+<div id="gallery">
+    {{range $uploadGroup := .uploads}}
+    <div class="row img">
+        {{range $upload := $uploadGroup}}
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <img src="{{$upload.Url}}" class="img-responsive">
+                <div class="caption">
+                    <h3>{{$upload.Meta.Name}}</h3>
+                    <span>Upload Time: {{$upload.Meta.UploadTime.UTC.Format "3:04pm (UTC)"}}</span>
+                </div>
+            </div>
+        </div>
+        {{end}}
+    </div>
+    {{end}}
+</div>
+{{end}}

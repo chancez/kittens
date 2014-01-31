@@ -1,3 +1,7 @@
 #kitten_name {
     width: 50%;
 }
+
+#gallery .img {
+    margin-top: 20px;
+}

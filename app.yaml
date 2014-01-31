@@ -1,4 +1,4 @@
-application: helloworld
+application: cs496zibolskc
 runtime: go
 api_version: go1
 version: 1
