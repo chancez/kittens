@@ -63,18 +63,14 @@ func handleGallery(w http.ResponseWriter, r *http.Request) {
 			Url:  url,
 			Meta: upload,
 		}
-		c.Infof("groupCounter: %v", groupCounter)
-		c.Infof("upload: %v", up)
 		group = append(group, up)
 		if (groupCounter%3) == 0 && groupCounter != 0 {
-			c.Infof("group: %v", group)
 			uploads = append(uploads, group)
 			group = make([]UserUploadUrl, 0)
 		} else if groupCounter == len(userUploads) {
 			uploads = append(uploads, group)
 		}
 	}
-	c.Infof("%v", uploads)
 	context := map[string][][]UserUploadUrl{
 		"uploads": uploads,
 	}
@@ -83,8 +79,24 @@ func handleGallery(w http.ResponseWriter, r *http.Request) {
 	t.ExecuteTemplate(w, "base", context)
 }
 
-func handleServe(w http.ResponseWriter, r *http.Request) {
-	blobstore.Send(w, appengine.BlobKey(r.FormValue("blobKey")))
+func handlePrune(w http.ResponseWriter, r *http.Request) {
+	c := appengine.NewContext(r)
+	minusFive, _ := time.ParseDuration("-5m")
+	old := time.Now().Add(minusFive)
+	q := datastore.NewQuery("UserUpload").Filter("UploadTime <", old)
+	var oldUploads []UserUpload
+	keys, err := q.GetAll(c, &oldUploads)
+	if err != nil {
+		c.Errorf("Unable to retrieve data %v", err)
+		return
+	}
+	for _, upload := range oldUploads {
+		err := image.DeleteServingURL(c, upload.BlobKey)
+		if err != nil {
+			c.Errorf("Unable to delte serving url", err)
+		}
+	}
+	datastore.DeleteMulti(c, keys)
 }
 
 func handleUpload(w http.ResponseWriter, r *http.Request) {
@@ -114,7 +126,6 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 		UploadTime: time.Now(),
 	}
 	key := datastore.NewIncompleteKey(c, "UserUpload", nil)
-	c.Infof("key: %s", key)
 	_, err = datastore.Put(c, key, upload)
 	if err != nil {
 		serveError(c, w, err)
@@ -126,6 +137,6 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 func init() {
 	http.HandleFunc("/", handleRoot)
 	http.HandleFunc("/gallery", handleGallery)
-	// http.HandleFunc("/serve/", handleServe)
 	http.HandleFunc("/upload", handleUpload)
+	http.HandleFunc("/prune", handlePrune)
 }
