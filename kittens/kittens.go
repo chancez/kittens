@@ -45,7 +45,7 @@ func handleRoot(w http.ResponseWriter, r *http.Request) {
 
 func handleGallery(w http.ResponseWriter, r *http.Request) {
 	c := appengine.NewContext(r)
-	q := datastore.NewQuery("UserUpload")
+	q := datastore.NewQuery("UserUpload").Order("-UploadTime")
 	var userUploads []UserUpload
 	_, err := q.GetAll(c, &userUploads)
 	if err != nil {
