@@ -8,11 +8,11 @@
     <form action="{{.}}" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="kitten_name">Kitten Name</label>
-            <input id="kitten_name" type="text" class="form-control" name="kitten_name" accept="image/*">
+            <input id="kitten_name" type="text" class="form-control" name="kitten_name">
         </div>
         <div class="form-group">
-            <label for="file" id="file_upload"></label>
-            <input id="file_upload" type="file" name="file">
+            <label for="file_upload"></label>
+            <input id="file_upload" type="file" name="file" accept="image/*">
             <p class="help-block">Upload an image of your favorite kitten!</p>
         </div>
         <button type="submit" class="btn btn-primary">Submit Kitten</button>
