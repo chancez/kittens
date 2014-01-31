@@ -23,30 +23,32 @@
 </head>
 
   <body>
-
-    <div class="container">
-
-      <!-- Static navbar -->
-      <div class="navbar navbar-default" role="navigation">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="/">KittenGram</a>
+    <div id="wrap">
+      <div class="container">
+        <!-- Static navbar -->
+        <div class="navbar navbar-default" role="navigation">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">KittenGram</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a href="/">Submisson</a></li>
+              <li><a href="/gallery">Gallery</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="/">Submisson</a></li>
-            <li><a href="/gallery">Gallery</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
+
+        <div id="content" class="container">
+          {{template "content" .}}
+        </div>
+      </div> <!-- /container -->
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <p class="text-muted">Note: Images older than 5 minutes are deleted.</p>
       </div>
-
-      <span class="messages">
-      </span>
-
-      <div id="main-content" class="class">
-        {{template "content" .}}
-      </div>
-
-    </div> <!-- /container -->
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

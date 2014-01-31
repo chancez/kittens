@@ -1,7 +1,7 @@
 application: cs496zibolskc
 runtime: go
 api_version: go1
-version: 1
+version: 3
 
 handlers:
 - url: /static

@@ -1,6 +1,10 @@
 {{define "title"}}Upload{{end}}
 
 {{define "content"}}
+<div id="upload">
+    <div class="page-header">
+        <h1>Upload a picture of your favorite kitten!</h1>
+    </div>
     <form action="{{.}}" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="kitten_name">Kitten Name</label>
@@ -13,4 +17,5 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit Kitten</button>
     </form>
+</div>
 {{end}}

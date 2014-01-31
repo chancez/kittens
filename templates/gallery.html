@@ -2,8 +2,11 @@
 
 {{define "content"}}
 <div id="gallery">
+    <div class="page-header">
+        <h1>Gallery</h1>
+    </div>
     {{range $uploadGroup := .uploads}}
-    <div class="row img">
+    <div class="row">
         {{range $upload := $uploadGroup}}
         <div class="col-md-4">
             <div class="thumbnail">
