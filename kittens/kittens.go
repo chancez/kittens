@@ -96,6 +96,7 @@ func handlePrune(w http.ResponseWriter, r *http.Request) {
 			c.Errorf("Unable to delte serving url", err)
 		}
 	}
+	c.Infof("keys: %v", keys)
 	datastore.DeleteMulti(c, keys)
 }
 

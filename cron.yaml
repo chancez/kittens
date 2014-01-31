@@ -1,4 +1,4 @@
 cron:
 - description: clean old files
-  url: /clean
+  url: /prune
   schedule: every 1 minutes
