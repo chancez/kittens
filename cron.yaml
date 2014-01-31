@@ -1,0 +1,4 @@
+cron:
+- description: clean old files
+  url: /clean
+  schedule: every 1 minutes
